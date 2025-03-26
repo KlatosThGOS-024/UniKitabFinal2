@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:NtEPpVnIwRYApCfUiDrDuBzGOkXlzHyl@gondola.proxy.rlwy.net:51857/railway"
+}
+model User {
+  id        String  @id @default(uuid())
+  username  String  @unique
+  email     String  @unique
+  password  String
+  token     String?  
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Example {
+  id          Int     @unique @default(autoincrement())
+  problemId   String
+  inputText   String
+  outputText  String
+  explanation String?
+  img         String?
+  problem     Problem @relation(fields: [problemId], references: [problemId])
+}
+
+model TestCases {
+  id        Int     @unique @default(autoincrement())
+  problemId String
+  input     String
+  output    String
+  problem   Problem @relation(fields: [problemId], references: [problemId])
+}
+
+model Problem {
+  problemNumber   String?
+  problemId       String      @unique
+  problemTitle    String
+  inputText1      String
+  inputText2      String
+  inputText3      String
+  difficulty      Difficulty
+  likesCount      Int
+  dislikeCount    Int
+  handlerFunc     String
+  starterFunction String
+  examples        Example[]
+  testCases       TestCases[]
+}
+
+model PdfBook {
+  id              String   @id @default(uuid())
+  name            String
+  bookFrontImgSrc String
+  fileId          String
+  createdAt       DateTime @default(now())
+}
+
+model QuestionDocument {
+  documentId String     @id
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  questions  Question[]
+}
+
+model Question {
+  id            String           @id
+  questionTitle String
+  difficulty    Difficulty
+  category      String
+  status        Boolean          @default(false)
+  solution      String?
+  documentId    String
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  document      QuestionDocument @relation(fields: [documentId], references: [documentId], onDelete: Cascade)
+}
+
+enum Difficulty {
+  Easy
+  Medium
+  Hard
+}

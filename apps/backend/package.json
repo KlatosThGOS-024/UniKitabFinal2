@@ -1,0 +1,53 @@
+{
+  "name": "unikitabbackend",
+  "version": "1.0.0",
+  "description": "UniKitabBackend",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx prisma generate --schema=../../packages/db/prisma/schema.prisma",
+    "build": " tsc -b",
+    "node": "nodemon dist/index.js",
+    "dev": "npm run build && npm run node",
+    "start": "node dist/index.js"
+  },
+  "keywords": [
+    "Uber",
+    "Clone",
+    "JS",
+    "TS"
+  ],
+  "author": "Priyanshu",
+  "license": "ISC",
+  "dependencies": {
+    "@mirite/zod-to-mongoose": "^0.0.5",
+    "@repo/db": "*",
+    "@repo/types": "*",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
+    "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.6",
+    "express": "^4.21.1",
+    "fs": "^0.0.1-security",
+    "googleapis": "^146.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.3",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1",
+    "ts-node": "^10.9.2",
+    "zod": "^3.23.8",
+    "prisma": "^6.5.0",
+    "@prisma/client": "^6.5.0"
+  },
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/multer": "^1.4.12",
+    "nodemon": "^3.1.7"
+  }
+}

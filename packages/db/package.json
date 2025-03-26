@@ -1,0 +1,21 @@
+{
+  "name": "@repo/db",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "type": "commonjs",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@prisma/client": "^6.5.0",
+    "prisma": "^6.5.0"
+  }
+}

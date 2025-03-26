@@ -1,0 +1,36 @@
+# Node.js
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# Debug
+.vscode/
+
+# IDE specific files
+.idea/
+*.sublime-workspace
+
+# npm package lock file (optional, if you use yarn or other package managers)
+package-lock.json
+yarn.lock
+
+# Build directory (if applicable)
+build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+
+# Optional: For storing large files (such as images, if uploaded locally)
+uploads/
+
+# Others
+*.tgz
+
