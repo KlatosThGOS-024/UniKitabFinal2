@@ -118,7 +118,6 @@ export const NavBar = () => {
       )}
 
       <div className="flex items-center justify-between bg-[#111111] px-2 py-[8px]">
-        {/* Logo and Search */}
         <div className="flex items-center px-4 gap-5 w-full">
           <a
             href="/home"
@@ -131,7 +130,6 @@ export const NavBar = () => {
           </div>
         </div>
 
-        {/* Desktop Navigation */}
         <div className="items-center px-4 max-md:hidden flex gap-6">
           <ul className="flex gap-7 items-center text-[18px]">
             <li className="hover:text-[#69D4F3] font-[500] text-[#423e3e]">
@@ -184,7 +182,6 @@ export const NavBar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center gap-2">
           <div className="block md:hidden">
             <SearchBar />
@@ -203,7 +200,6 @@ export const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       {showMobileMenu && (
         <div
           className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
