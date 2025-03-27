@@ -10,11 +10,11 @@ export const addPdfBook = async ({
     formData.append("PdfFile", file);
     formData.append("imgSrc", imgSrc);
 
-    const apiUrl = `http://localhost:8000/api/v1/book/pdf-add`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/book/pdf-add`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/pdf-add`
-    //   : "http://localhost:8000/api/v1/book/pdf-add"; // Fallback to localhost if not defined
+    //   : "https://unikitab-backend-4.onrender.com/api/v1/book/pdf-add"; // Fallback to localhost if not defined
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -30,11 +30,11 @@ export const addPdfBook = async ({
 
 export const getPdfBook = async (search: string) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/book/pdf-get`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/book/pdf-get`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/pdf-get`
-    //   : "http://localhost:8000/api/v1/book/pdf-get"; // Fallback to localhost if not defined
+    //   : "https://unikitab-backend-4.onrender.com/api/v1/book/pdf-get"; // Fallback to localhost if not defined
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -53,11 +53,11 @@ export const getPdfBook = async (search: string) => {
 
 export const fetchPdfUrl = async (fileId: string) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/book/url-get`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/book/url-get`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/url-get`
-    //   : "http://localhost:8000/api/v1/book/url-get"; // Fallback to localhost if not defined
+    //   : "https://unikitab-backend-4.onrender.com/api/v1/book/url-get"; // Fallback to localhost if not defined
 
     const response = await fetch(apiUrl, {
       method: "POST",

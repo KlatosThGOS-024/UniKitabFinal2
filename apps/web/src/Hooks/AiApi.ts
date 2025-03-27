@@ -2,8 +2,9 @@ export const getAIresponse = async (message: string) => {
   try {
     // const apiUrl = process.env.REACT_APP_API_URL
     //   ? `${process.env.REACT_APP_API_URL}/api/v1/ai/get-answer`
-    //   : "http://localhost:8000/api/v1/ai/get-answer";
-    const apiUrl = "http://localhost:8000/api/v1/ai/get-answer";
+    //   : "https://unikitab-backend-4.onrender.com/api/v1/ai/get-answer";
+    const apiUrl =
+      "https://unikitab-backend-4.onrender.com/api/v1/ai/get-answer";
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {

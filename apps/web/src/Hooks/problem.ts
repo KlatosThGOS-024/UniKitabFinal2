@@ -2,10 +2,10 @@ import { Problem } from "@/components/LiteCodeComponent/MockProblem/types/types"
 
 export const getQuestions = async (problemId: string) => {
   try {
-    // const apiUrl = `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
-    const apiUrl = `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
+    // const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/question-get?problemId=${problemId}`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/question-get?problemId=${problemId}`;
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-get?problemId=${problemId}`
-    //   : `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/questions/question-get?problemId=${problemId}`;
 
     const response = await fetch(apiUrl, {
       method: "GET",
@@ -43,12 +43,12 @@ export async function addQtoDb(problem: Problem) {
     } = questionData;
 
     const handler = handlerFunc.toString();
-    const apiUrl = `http://localhost:8000/api/v1/questions/question-add`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/question-add`;
 
-    //  const apiUrl = `http://localhost:8000/api/v1/questions/question-add`;
+    //  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/question-add`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-add`
-    //   : `http://localhost:8000/api/v1/questions/question-add`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/questions/question-add`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -80,12 +80,12 @@ export async function addQtoDb(problem: Problem) {
 
 export const createQuestionArray = async (message: string) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/ai/generate-QuestionArray`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/ai/generate-QuestionArray`;
 
-    //  const apiUrl = `http://localhost:8000/api/v1/ai/generate-Qarray`;
+    //  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/ai/generate-Qarray`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/ai/generate-Qarray`
-    //   : `http://localhost:8000/api/v1/ai/generate-Qarray`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/ai/generate-Qarray`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -106,13 +106,13 @@ export const createQuestionArray = async (message: string) => {
 
 export const createQuestion = async (question: string, id: string) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/ai/generate-Question-byIdAndTitle`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/ai/generate-Question-byIdAndTitle`;
 
-    //   const apiUrl = `http://localhost:8000/api/v1/ai/get-answer-bysheet`;
+    //   const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/ai/get-answer-bysheet`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/ai/get-answer-bysheet`
-    //   : `http://localhost:8000/api/v1/ai/get-answer-bysheet`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/ai/get-answer-bysheet`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -145,11 +145,11 @@ export const saveQuestionArray = async (
   }[]
 ) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/questions/question-addArray`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/question-addArray`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-addArray`
-    //   : `http://localhost:8000/api/v1/questions/question-addArray`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/questions/question-addArray`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -172,11 +172,11 @@ export const saveQuestionArray = async (
 
 export const getQuestionsByDocumentId = async (documentId: string) => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/questions/getQuestionArray?documentId=${documentId}`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/getQuestionArray?documentId=${documentId}`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/getQuestionArray?documentId=${documentId}`
-    //   : `http://localhost:8000/api/v1/questions/getQuestionArray?documentId=${documentId}`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/questions/getQuestionArray?documentId=${documentId}`;
 
     const response = await fetch(apiUrl, {
       method: "GET",
@@ -199,11 +199,11 @@ export const getQuestionsByDocumentId = async (documentId: string) => {
 
 export const getAllDocs = async () => {
   try {
-    const apiUrl = `http://localhost:8000/api/v1/questions/documents`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/questions/documents`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/documents`
-    //   : `http://localhost:8000/api/v1/questions/documents`;
+    //   : `https://unikitab-backend-4.onrender.com/api/v1/questions/documents`;
 
     const response = await fetch(apiUrl, {
       method: "GET",

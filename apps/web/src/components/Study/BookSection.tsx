@@ -46,7 +46,7 @@ const BookCard = ({ book }: { book: Book }) => {
       const fileUrl = response.data.downloadUrl;
       // console.log(fileUrl);
       try {
-        const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
+        const pdfEndpoint = `https://unikitab-backend-4.onrender.com/${fileUrl}`;
         dispatch(addFileUrl(pdfEndpoint));
 
         setTimeout(() => {

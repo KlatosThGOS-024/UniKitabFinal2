@@ -1,9 +1,9 @@
 const logOutUser = async () => {
-  const apiUrl = `http://localhost:8000/api/v1/user/logout`;
+  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/user/logout`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/logout`
-  //   : `http://localhost:8000/api/v1/user/logout`;
+  //   : `https://unikitab-backend-4.onrender.com/api/v1/user/logout`;
   const token = localStorage.getItem("accessToken");
   const response = await fetch(apiUrl, {
     method: "POST",
@@ -18,10 +18,10 @@ const logOutUser = async () => {
 };
 
 const logInUser = async (params: { username: string; password: string }) => {
-  const apiUrl = `http://localhost:8000/api/v1/user/login`;
+  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/user/login`;
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/login`
-  //   : `http://localhost:8000/api/v1/user/login`;
+  //   : `https://unikitab-backend-4.onrender.com/api/v1/user/login`;
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -38,10 +38,10 @@ const createAccount = async (params: {
   email: string;
   password: string;
 }) => {
-  const apiUrl = `http://localhost:8000/api/v1/user/signUp`;
+  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/user/signUp`;
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/signUp`
-  //   : `http://localhost:8000/api/v1/user/signUp`;
+  //   : `https://unikitab-backend-4.onrender.com/api/v1/user/signUp`;
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -53,11 +53,11 @@ const createAccount = async (params: {
 };
 
 const logInCheck = async (token: string) => {
-  const apiUrl = `http://localhost:8000/api/v1/user/login-check`;
+  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/user/login-check`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/login-check`
-  //   : `http://localhost:8000/api/v1/user/login-check`;
+  //   : `https://unikitab-backend-4.onrender.com/api/v1/user/login-check`;
   const response = await fetch(apiUrl, {
     method: "POST",
 
@@ -71,11 +71,11 @@ const logInCheck = async (token: string) => {
 };
 
 const getUserProfile = async () => {
-  const apiUrl = `http://localhost:8000/api/v1/user/user-profile`;
+  const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/user/user-profile`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/user-profile`
-  //   : `http://localhost:8000/api/v1/user/user-profile`;
+  //   : `https://unikitab-backend-4.onrender.com/api/v1/user/user-profile`;
 
   const token = localStorage.getItem("accessToken");
   const response = await fetch(apiUrl, {

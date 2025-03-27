@@ -10,10 +10,10 @@ async function runCodeWithGemini(options: any) {
   } = options;
 
   try {
-    const apiUrl = `http://localhost:8000/api/v1/codeRunner/gemini-format-run`;
+    const apiUrl = `https://unikitab-backend-4.onrender.com/api/v1/codeRunner/gemini-format-run`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/codeRunner/gemini-format-run`
-    //   : "http://localhost:8000/api/v1/codeRunner/gemini-format-run";
+    //   : "https://unikitab-backend-4.onrender.com/api/v1/codeRunner/gemini-format-run";
 
     const response = await axios({
       method: "post",
