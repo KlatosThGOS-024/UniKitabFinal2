@@ -10,7 +10,7 @@ async function runCodeWithGemini(options: any) {
   } = options;
 
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/codeRunner/gemini-format-run`;
+    const apiUrl = `http://localhost:8000/api/v1/codeRunner/gemini-format-run`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/codeRunner/gemini-format-run`
     //   : "http://localhost:8000/api/v1/codeRunner/gemini-format-run";
@@ -54,25 +54,25 @@ export async function testCodeRunner(code: string, problemDescription: string) {
       executionTime: `${summary.totalExecutionTime.toFixed(4)}ms`,
     };
 
-    console.log(code);
+    // console.log(code);
     console.table(formattedResult);
 
     if (summary.failed > 0) {
-      console.log("\n🔍 Failed Test Cases:");
+      // console.log("\n🔍 Failed Test Cases:");
       //@ts-ignore
       results.forEach((testResult, index) => {
         if (!testResult.passed) {
-          console.log(`\n❌ Test Case #${index + 1}:`);
-          console.log(`Input:    ${JSON.stringify(testResult.input)}`);
-          console.log(`Expected: ${JSON.stringify(testResult.expected)}`);
-          console.log(`Actual:   ${JSON.stringify(testResult.actual)}`);
+          // console.log(`\n❌ Test Case #${index + 1}:`);
+          // console.log(`Input:    ${JSON.stringify(testResult.input)}`);
+          // console.log(`Expected: ${JSON.stringify(testResult.expected)}`);
+          // console.log(`Actual:   ${JSON.stringify(testResult.actual)}`);
 
           if (testResult.error) {
-            console.log(`Error:    ${testResult.error}`);
+            // console.log(`Error:    ${testResult.error}`);
           }
 
           if (testResult.consoleOutput && testResult.consoleOutput.length > 0) {
-            console.log("Console Output:");
+            // console.log("Console Output:");
             //@ts-ignore
             testResult.consoleOutput.forEach((log) => console.log(`  ${log}`));
           }

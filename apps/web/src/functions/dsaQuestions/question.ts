@@ -1,20 +1,18 @@
-import {
-  Problem,
-  Difficulty,
-} from "@/components/LiteCodeComponent/MockProblem/types/types";
-import { createSlice, PayloadAction, nanoid } from "@reduxjs/toolkit";
+import { Problem } from "@/components/LiteCodeComponent/MockProblem/types/types";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialStateOfDsaQ: Problem[] = [];
-export const QuestionSlicer = createSlice({
-  name: "DsaQs",
-  initialState: initialStateOfDsaQ,
+const initialState: Problem[] = [];
+
+export const QuestionSlice = createSlice({
+  name: "questions",
+  initialState,
   reducers: {
     addQ: (state, action: PayloadAction<Problem>) => {
-      state.push(action.payload);
+      // console.log("🚀 Adding question(s) to store:", action.payload);
+      state[0] = action.payload;
     },
   },
 });
 
-export const { addQ } = QuestionSlicer.actions;
-
-export const QuestionReducer = QuestionSlicer.reducer;
+export const { addQ } = QuestionSlice.actions;
+export const QuestionReducer = QuestionSlice.reducer;

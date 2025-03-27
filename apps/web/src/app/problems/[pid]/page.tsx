@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Difficulty,
   Problem,
@@ -33,25 +32,34 @@ const ProblemPageSekeleton = () => {
     testCases: [],
   };
 
-  const [selectedProblem, setSelectedProblem] =
-    useState<Problem>(defaultProblem);
+  const [selectedProblem, setSelectedProblem] = useState<Problem[]>([
+    defaultProblem,
+  ]);
 
-  const selectQuestionById = useSelector(
+  const questionReducer = useSelector(
     (state: IRootState) => state.QuestionReducer
   );
 
+  useEffect(() => {
+    // console.log("Updating selectedProblem:", questionReducer);
+    setSelectedProblem(questionReducer);
+  }, [questionReducer]); // Runs only when `questionReducer` changes
+  // /state.QuestionReducer
   const params = useSearchParams();
   const problemId = params.get("problemId") || "";
-
-  useEffect(() => {
-    const foundProblem = selectQuestionById.find(
-      (item: Problem) => item.problemId === problemId
-    );
-    if (foundProblem) {
-      setSelectedProblem(foundProblem);
-    }
-  }, [problemId, selectQuestionById]);
-
+  // useEffect(() => {
+  //   const foundProblem = selectQuestionById.map((item: Problem) => {
+  //     // console.log(item);
+  //     if (item.problemId === problemId) {
+  //       return item;
+  //     }
+  //   });
+  //   if (foundProblem) {
+  //     //@ts-ignore
+  //     setSelectedProblem(foundProblem);
+  //   }
+  // }, [problemId, selectQuestionById]);
+  // console.log("helllohelllohelllohelllohelllo", selectedProblem);
   if (!selectedProblem) {
     return <div>Problem data not available.</div>;
   }
@@ -61,15 +69,15 @@ const ProblemPageSekeleton = () => {
       <Split className="split h-screen bg-[#111]">
         <div className="my-1 overflow-auto mx-1">
           <LeftSideProblemDescription
-            ResponseExampleProp={selectedProblem.examples}
-            ResponseProblemProp={selectedProblem}
+            ResponseExampleProp={selectedProblem[0].examples}
+            ResponseProblemProp={selectedProblem[0]}
           />
         </div>
         <div>
           <RightSideCodeEditor
-            ProblemDescription={`${selectedProblem.inputText1} ${selectedProblem.inputText2} ${selectedProblem.inputText3}`}
-            ResponseTestCasesProp={selectedProblem.testCases}
-            starterFunction={selectedProblem.starterFunction}
+            ProblemDescription={`${selectedProblem[0].inputText1} ${selectedProblem[0].inputText2} ${selectedProblem[0].inputText3}`}
+            ResponseTestCasesProp={selectedProblem[0].testCases}
+            starterFunction={selectedProblem[0].starterFunction}
           />
         </div>
       </Split>

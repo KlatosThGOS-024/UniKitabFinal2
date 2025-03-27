@@ -57,7 +57,7 @@ const FileUpload = ({ setArrayOfQs }: { setArrayOfQs: any }) => {
 
       setArrayOfQs(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

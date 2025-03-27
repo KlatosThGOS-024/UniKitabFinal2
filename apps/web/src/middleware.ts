@@ -10,7 +10,6 @@ export function middleware(req: NextRequest) {
       req.nextUrl.pathname.startsWith("/litecode")) &&
     !accessToken
   ) {
-    console.log("Redirecting to /home?authRequired=true");
     return NextResponse.redirect(new URL("/home?authRequired=true", req.url));
   }
 

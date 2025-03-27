@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
+  generateProblem,
   generateProblemArray,
   getAnswer,
-  parseDSASheet,
 } from "../controllers/AiResponse.controller";
 const aiRouter = Router();
 aiRouter.route("/get-answer").post(getAnswer);
-aiRouter.route("/generate-Qarray").post(generateProblemArray);
+aiRouter.route("/generate-QuestionArray").post(generateProblemArray);
+aiRouter.route("/generate-Question-byIdAndTitle").post(generateProblem);
 
-aiRouter.route("/get-answer-bysheet").post(parseDSASheet);
-
+// aiRouter.route("/get-answer-bysheet").post(parseDSASheet);
 export default aiRouter;

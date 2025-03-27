@@ -11,7 +11,7 @@ const fileSlicer = createSlice({
   initialState: initialFileValue,
   reducers: {
     addFileUrl: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       state.FileUrl = action.payload;
     },
   },

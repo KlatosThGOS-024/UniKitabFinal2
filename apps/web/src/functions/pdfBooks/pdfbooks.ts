@@ -17,7 +17,7 @@ const pdfBookSlicer = createSlice({
   initialState: initialStateOfBookArray,
   reducers: {
     addBooksToArray: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
     },
     getBooksFromArray: (state, action) => {
       return state;

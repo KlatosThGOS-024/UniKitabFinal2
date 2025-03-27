@@ -30,9 +30,8 @@ export const SearchBooks = ({ searchProp }: { searchProp: Book[] }) => {
       const response = await fetchPdfUrl(fileid);
       const fileUrl = response.data.downloadUrl;
       //isValid const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
-      const pdfEndpoint = `https://criminal-kacy-project223-f659ffae.koyeb.app/${fileUrl}`;
+      const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
 
-      console.log(pdfEndpoint);
       dispatch(addFileUrl(pdfEndpoint));
 
       setTimeout(() => {

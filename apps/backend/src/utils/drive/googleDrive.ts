@@ -78,7 +78,6 @@ export class Drive {
         fields: "id",
       });
 
-      console.log("✅ File Uploaded. File ID:", response.data.id);
       return response.data.id;
     } catch (error) {
       console.error("❌ Error uploading file:", error);
@@ -89,7 +88,7 @@ export class Drive {
   async getFileUrl(auth: any, fileId: string): Promise<string | null> {
     try {
       const drive = google.drive({ version: "v3", auth });
-      console.log("Getting file info for ID:", fileId);
+      // console.log("Getting file info for ID:", fileId);
 
       // First, verify the file exists and get its metadata
       const fileMetadata = await drive.files.get({
@@ -238,7 +237,7 @@ export class Drive {
 //         fields: "id",
 //       });
 
-//       console.log("✅ File Uploaded. File ID:", response.data.id);
+//       // console.log("✅ File Uploaded. File ID:", response.data.id);
 //       return response.data.id;
 //     } catch (error) {
 //       console.error("❌ Error uploading file:", error);
@@ -249,7 +248,7 @@ export class Drive {
 //   async getFileUrl(auth: any, fileId: string): Promise<string | null> {
 //     try {
 //       const drive = google.drive({ version: "v3", auth });
-//       console.log("Getting file info for ID:", fileId);
+//       // console.log("Getting file info for ID:", fileId);
 
 //       // First, verify the file exists and get its metadata
 //       const fileMetadata = await drive.files.get({

@@ -10,7 +10,7 @@ export const addPdfBook = async ({
     formData.append("PdfFile", file);
     formData.append("imgSrc", imgSrc);
 
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/book/pdf-add`;
+    const apiUrl = `http://localhost:8000/api/v1/book/pdf-add`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/pdf-add`
@@ -30,7 +30,7 @@ export const addPdfBook = async ({
 
 export const getPdfBook = async (search: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/book/pdf-get`;
+    const apiUrl = `http://localhost:8000/api/v1/book/pdf-get`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/pdf-get`
@@ -47,13 +47,13 @@ export const getPdfBook = async (search: string) => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
 export const fetchPdfUrl = async (fileId: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/book/url-get`;
+    const apiUrl = `http://localhost:8000/api/v1/book/url-get`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/book/url-get`
@@ -73,7 +73,7 @@ export const fetchPdfUrl = async (fileId: string) => {
     }
 
     const data = await response.json();
-    console.log(data.data.downloadUrl);
+    // console.log(data.data.downloadUrl);
     return data;
   } catch (error) {
     console.error("Error fetching PDF URL:", error);

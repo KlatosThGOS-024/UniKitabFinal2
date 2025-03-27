@@ -11,7 +11,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
   "https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 export const PdfViewer = () => {
   const selector = useSelector((state: IRootState) => {
-    console.log(state.fileReducer.FileUrl);
+    // console.log(state.fileReducer.FileUrl);
     return state.fileReducer.FileUrl;
   });
   const [loader, setLooader] = useState(true);

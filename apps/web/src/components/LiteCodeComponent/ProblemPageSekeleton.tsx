@@ -10,20 +10,41 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import { IoCodeWorking } from "react-icons/io5";
 import { IoIosAdd } from "react-icons/io";
-
 import { BsFullscreen } from "react-icons/bs";
 import { IoIosSettings } from "react-icons/io";
-
 import { TfiControlPlay } from "react-icons/tfi";
 import { FaCloudArrowUp } from "react-icons/fa6";
-import { Example, Problem, TestCases } from "./MockProblem/types/types";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
 import { runCodeTest } from "@/functions/code/code";
 
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center w-full h-full">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+export interface Example {
+  inputText: string;
+  outputText: string;
+  explanation?: string;
+}
+
+export interface Problem {
+  problemNumber: string;
+  problemTitle: string;
+  difficulty: string;
+  inputText1: string;
+  inputText2?: string;
+  inputText3?: string;
+}
+
+export interface TestCases {
+  input: any;
+  output: any;
+}
+
+const FullPageLoader = () => (
+  <div className="fixed inset-0 bg-[#1E1E1E] flex flex-col items-center justify-center z-50">
+    <div className="animate-pulse">
+      <div className="w-16 h-16 bg-blue-500 rounded-full mb-4"></div>
+    </div>
+    <div className="text-white text-2xl font-semibold">Loading Problem...</div>
+    <div className="mt-4 text-gray-400">Preparing your coding challenge</div>
   </div>
 );
 
@@ -34,29 +55,35 @@ export const LeftSideProblemDescription = ({
   ResponseProblemProp: Problem;
   ResponseExampleProp: Example[];
 }) => {
-  // Use a real loading state that's properly managed
+  // console.log(ResponseProblemProp, ResponseExampleProp);
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  const [showFullLoader, setShowFullLoader] = useState(true);
 
-  // Properly handle mounting to prevent hydration errors
   useEffect(() => {
-    setIsMounted(true);
-    // Check if data is available and set loading state
-    if (ResponseProblemProp && ResponseExampleProp) {
-      setIsLoading(false);
-    }
+    const loaderTimer = setTimeout(() => {
+      setShowFullLoader(false);
+    }, 5000);
+
+    const dataLoadTimer = setTimeout(() => {
+      if (ResponseProblemProp && ResponseExampleProp) {
+        setIsLoading(false);
+      }
+    }, 5000);
+
+    return () => {
+      clearTimeout(loaderTimer);
+      clearTimeout(dataLoadTimer);
+    };
   }, [ResponseProblemProp, ResponseExampleProp]);
 
-  // Handle server-side rendering by returning a simple div initially
-  if (!isMounted) {
-    return <div className="w-full h-full bg-[#262626]"></div>;
+  if (showFullLoader) {
+    return <FullPageLoader />;
   }
 
-  // Show loading spinner if data isn't ready yet
   if (isLoading) {
     return (
-      <section className="bg-[#262626] h-full">
-        <LoadingSpinner />
+      <section className="bg-[#262626] h-full flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </section>
     );
   }
@@ -186,7 +213,7 @@ export const RightSideCodeEditor = ({
   starterFunction: any;
 }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+  const [showFullLoader, setShowFullLoader] = useState(true);
   const [caseCount, setCaseCount] = useState(0);
   const [testCases, setTestCases] = useState<string[]>([]);
   const [targetCases, setTargetCases] = useState<string[]>([]);
@@ -194,26 +221,36 @@ export const RightSideCodeEditor = ({
   const [targetValue, setTargetValue] = useState("");
   const [userCode, setUserCode] = useState("");
 
+  const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    setIsMounted(true);
+    const loaderTimer = setTimeout(() => {
+      setShowFullLoader(false);
+    }, 5000);
 
-    if (ResponseTestCasesProp && ResponseTestCasesProp.length > 0) {
-      const formattedTestCases = ResponseTestCasesProp.map((testCase) =>
-        JSON.stringify(testCase.input || testCase.input, null, 2)
-      );
+    const dataLoadTimer = setTimeout(() => {
+      if (ResponseTestCasesProp && ResponseTestCasesProp.length > 0) {
+        const formattedTestCases = ResponseTestCasesProp.map((testCase) =>
+          JSON.stringify(testCase.input || testCase.input, null, 2)
+        );
 
-      const formattedTargets = ResponseTestCasesProp.map((testCase) =>
-        //@ts-expect-error
-        JSON.stringify(testCase.input.target || testCase.output, null, 2)
-      );
+        const formattedTargets = ResponseTestCasesProp.map((testCase) =>
+          JSON.stringify(testCase.input?.target || testCase.output, null, 2)
+        );
 
-      setTestCases(formattedTestCases);
-      setTargetCases(formattedTargets);
-      setInputValue(formattedTestCases[0] || "");
-      setTargetValue(formattedTargets[0] || "");
-      setUserCode(starterFunction || "");
-      setIsLoading(false);
-    }
+        setTestCases(formattedTestCases);
+        setTargetCases(formattedTargets);
+        setInputValue(formattedTestCases[0] || "");
+        setTargetValue(formattedTargets[0] || "");
+        setUserCode(starterFunction || "");
+        setIsLoading(false);
+      }
+    }, 5000);
+
+    return () => {
+      clearTimeout(loaderTimer);
+      clearTimeout(dataLoadTimer);
+    };
   }, [ResponseTestCasesProp, starterFunction]);
 
   const handleCaseChange = (index: number) => {
@@ -221,12 +258,11 @@ export const RightSideCodeEditor = ({
     setInputValue(testCases[index] || "");
     setTargetValue(targetCases[index] || "");
   };
-  const dispatch = useDispatch<AppDispatch>();
 
   const onChangeHandler = () => {
     try {
       const cb = new Function(`return ${userCode}`)();
-      console.log(cb, testCases, targetCases);
+      // console.log(cb, testCases, targetCases);
 
       dispatch(
         runCodeTest({
@@ -240,14 +276,14 @@ export const RightSideCodeEditor = ({
     }
   };
 
-  if (!isMounted) {
-    return <div className="w-full h-full bg-[#1E1E1E]"></div>;
+  if (showFullLoader) {
+    return <FullPageLoader />;
   }
 
   if (isLoading) {
     return (
-      <div className="bg-[#1E1E1E] h-full">
-        <LoadingSpinner />
+      <div className="bg-[#1E1E1E] h-full flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
   }
@@ -364,7 +400,6 @@ px-3 rounded-b-none items-center "
                     />
                   </div>
 
-                  {/* Target */}
                   <div>
                     <span className="font-[600] text-[#9EA0A3] ml-2">
                       target =

@@ -94,9 +94,18 @@ const getProblemFromDb = asyncHandler(async (req: Request, res: Response) => {
         problemId,
       },
     });
-
+    if (!findProblem) {
+      res.send(
+        new ApiResponse(401, false, "Problem doesnt present", findProblem)
+      );
+      return;
+    }
     res.send(
-      ApiResponse.success(201, "Successfully added the problem", findProblem)
+      ApiResponse.success(
+        201,
+        "Successfully get the problem from db",
+        findProblem
+      )
     );
   } catch (error) {
     console.error("Database error:", error);

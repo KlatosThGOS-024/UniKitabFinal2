@@ -44,9 +44,9 @@ const BookCard = ({ book }: { book: Book }) => {
 
       const response = await fetchPdfUrl(book.fileId);
       const fileUrl = response.data.downloadUrl;
-      console.log(fileUrl);
+      // console.log(fileUrl);
       try {
-        const pdfEndpoint = `https://criminal-kacy-project223-f659ffae.koyeb.app/${fileUrl}`;
+        const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
         dispatch(addFileUrl(pdfEndpoint));
 
         setTimeout(() => {

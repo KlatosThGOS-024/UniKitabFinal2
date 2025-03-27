@@ -1,5 +1,5 @@
 const logOutUser = async () => {
-  const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/user/logout`;
+  const apiUrl = `http://localhost:8000/api/v1/user/logout`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/logout`
@@ -18,7 +18,7 @@ const logOutUser = async () => {
 };
 
 const logInUser = async (params: { username: string; password: string }) => {
-  const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/user/login`;
+  const apiUrl = `http://localhost:8000/api/v1/user/login`;
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/login`
   //   : `http://localhost:8000/api/v1/user/login`;
@@ -38,7 +38,7 @@ const createAccount = async (params: {
   email: string;
   password: string;
 }) => {
-  const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/user/signUp`;
+  const apiUrl = `http://localhost:8000/api/v1/user/signUp`;
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/signUp`
   //   : `http://localhost:8000/api/v1/user/signUp`;
@@ -53,12 +53,11 @@ const createAccount = async (params: {
 };
 
 const logInCheck = async (token: string) => {
-  const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/user/login-check`;
+  const apiUrl = `http://localhost:8000/api/v1/user/login-check`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/login-check`
   //   : `http://localhost:8000/api/v1/user/login-check`;
-  console.log(apiUrl);
   const response = await fetch(apiUrl, {
     method: "POST",
 
@@ -72,7 +71,7 @@ const logInCheck = async (token: string) => {
 };
 
 const getUserProfile = async () => {
-  const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/user/user-profile`;
+  const apiUrl = `http://localhost:8000/api/v1/user/user-profile`;
 
   // const apiUrl = process.env.NEXT_APP_API_URL
   //   ? `${process.env.NEXT_APP_API_URL}/api/v1/user/user-profile`

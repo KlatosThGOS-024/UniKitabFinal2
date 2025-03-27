@@ -6,7 +6,7 @@ import { RiArrowUpDownLine } from "react-icons/ri";
 import Link from "next/link";
 import { CiSearch } from "react-icons/ci";
 
-import { Problem } from "./MockProblem/types/types";
+import { Difficulty, Problem } from "./MockProblem/types/types";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/store/store";
 import { addQ } from "@/functions/dsaQuestions/question";
@@ -20,6 +20,21 @@ export interface ProblemType {
   difficulty: string;
   category: string;
 }
+const defaultProblem: Problem = {
+  problemNumber: "0",
+  problemId: "",
+  problemTitle: "",
+  inputText1: "",
+  inputText2: "",
+  inputText3: "",
+  difficulty: Difficulty.Easy,
+  likesCount: 0,
+  dislikeCount: 0,
+  handlerFunc: "",
+  starterFunction: "",
+  examples: [],
+  testCases: [],
+};
 
 const LoadingSpinner = () => (
   <div className="flex justify-center items-center p-8">
@@ -32,7 +47,7 @@ const ClientSideProblems = ({
 }: {
   arrayOfQs: ProblemType[] | string;
 }) => {
-  const [problem, setProblem] = useState<Problem | null>(null);
+  const [problem, setProblem] = useState<Problem>(defaultProblem);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -57,30 +72,37 @@ const ClientSideProblems = ({
       );
 
       if (questionInStore) {
+        // console.log("question in store", questionInStore);
         setProblem(questionInStore);
         setLoading(false);
         return questionInStore;
       }
 
       const questionInDb = await getQuestions(id);
+      if (questionInDb.statusCode == 201 && questionInDb.length > 0) {
+        dispatch(addQ(questionInDb));
 
-      if (questionInDb && questionInDb.length > 0) {
-        dispatch(addQ(questionInDb[0]));
-        setProblem(questionInDb[0]);
+        setProblem(questionInDb);
         setLoading(false);
-        return questionInDb[0];
+        return questionInDb;
       }
-
       const response = await createQuestion(title, id);
-
-      if (!response || !response[0]) {
+      if (!response) {
         throw new Error("Failed to create question");
       }
+      // console.log("saving rdux and setProblem");
+      dispatch(addQ(response));
+      setProblem(response);
+      // console.log("Checkin db fine");
 
-      dispatch(addQ(response[0]));
-      setProblem(response[0]);
+      new Promise((resolve) => setTimeout(resolve, 10000));
+
+      // console.log("Everythung fine");
+
+      await new Promise((resolve) => setTimeout(resolve, 10000));
+
       setLoading(false);
-      return response[0];
+      return response;
     } catch (err) {
       console.error("Error in QuestionHandler:", err);
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -92,7 +114,12 @@ const ClientSideProblems = ({
   useEffect(() => {
     if (problem) {
       addQtoDb(problem)
-        .then(() => console.log("Successfully saved to DB"))
+        .then(() => {
+          new Promise((resolve) => setTimeout(resolve, 10000));
+
+          // console.log("Successfully saved to DB", problem);
+        })
+
         .catch((err) => console.error("Error saving to DB:", err));
     }
   }, [problem]);
@@ -250,6 +277,7 @@ const ClientSideProblems = ({
                           e.preventDefault();
                           QuestionHandler(value.questionTitle, value.id).then(
                             () => {
+                              // console.log("Chek redux");
                               window.location.href = `/problems/${value.questionTitle}?problemId=${value.id}`;
                             }
                           );
@@ -312,7 +340,6 @@ const Problems = ({ arrayOfQs }: { arrayOfQs: ProblemType[] | string }) => {
 const LiteCodeBody = () => {
   const [arrayOfQs, setArrayOfQs] = useState<ProblemType[]>([]);
   const [isMounted, setIsMounted] = useState(false);
-  console.log(arrayOfQs);
   useEffect(() => {
     setIsMounted(true);
   }, []);

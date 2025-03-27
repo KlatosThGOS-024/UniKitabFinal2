@@ -2,8 +2,8 @@ import { Problem } from "@/components/LiteCodeComponent/MockProblem/types/types"
 
 export const getQuestions = async (problemId: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/questions/question-get?problemId=${problemId}`;
-    // const apiUrl = process.env.NEXT_APP_API_URL
+    // const apiUrl = `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
+    const apiUrl = `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-get?problemId=${problemId}`
     //   : `http://localhost:8000/api/v1/questions/question-get?problemId=${problemId}`;
 
@@ -15,9 +15,9 @@ export const getQuestions = async (problemId: string) => {
     });
 
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -43,7 +43,9 @@ export async function addQtoDb(problem: Problem) {
     } = questionData;
 
     const handler = handlerFunc.toString();
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1//questions/question-add`;
+    const apiUrl = `http://localhost:8000/api/v1/questions/question-add`;
+
+    //  const apiUrl = `http://localhost:8000/api/v1/questions/question-add`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-add`
     //   : `http://localhost:8000/api/v1/questions/question-add`;
@@ -70,8 +72,7 @@ export async function addQtoDb(problem: Problem) {
       }),
     });
 
-    console.log(response);
-    console.log("New Problem created:");
+    // console.log("New Problem created:");
   } catch (error) {
     console.error("Error while adding problem:", error);
   }
@@ -79,7 +80,9 @@ export async function addQtoDb(problem: Problem) {
 
 export const createQuestionArray = async (message: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/ai/generate-Qarray`;
+    const apiUrl = `http://localhost:8000/api/v1/ai/generate-QuestionArray`;
+
+    //  const apiUrl = `http://localhost:8000/api/v1/ai/generate-Qarray`;
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/ai/generate-Qarray`
     //   : `http://localhost:8000/api/v1/ai/generate-Qarray`;
@@ -97,13 +100,15 @@ export const createQuestionArray = async (message: string) => {
     const data = await response.json();
     return data.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
 export const createQuestion = async (question: string, id: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/ai/get-answer-bysheet`;
+    const apiUrl = `http://localhost:8000/api/v1/ai/generate-Question-byIdAndTitle`;
+
+    //   const apiUrl = `http://localhost:8000/api/v1/ai/get-answer-bysheet`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/ai/get-answer-bysheet`
@@ -123,7 +128,7 @@ export const createQuestion = async (question: string, id: string) => {
     const data = await response.json();
     return data.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return error;
   }
 };
@@ -140,7 +145,7 @@ export const saveQuestionArray = async (
   }[]
 ) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/questions/question-addArray`;
+    const apiUrl = `http://localhost:8000/api/v1/questions/question-addArray`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/question-addArray`
@@ -167,7 +172,7 @@ export const saveQuestionArray = async (
 
 export const getQuestionsByDocumentId = async (documentId: string) => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/questions/getQuestionArray?documentId=${documentId}`;
+    const apiUrl = `http://localhost:8000/api/v1/questions/getQuestionArray?documentId=${documentId}`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/getQuestionArray?documentId=${documentId}`
@@ -194,7 +199,7 @@ export const getQuestionsByDocumentId = async (documentId: string) => {
 
 export const getAllDocs = async () => {
   try {
-    const apiUrl = `https://criminal-kacy-project223-f659ffae.koyeb.app/api/v1/questions/documents`;
+    const apiUrl = `http://localhost:8000/api/v1/questions/documents`;
 
     // const apiUrl = process.env.NEXT_APP_API_URL
     //   ? `${process.env.NEXT_APP_API_URL}/api/v1/questions/documents`

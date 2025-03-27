@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
   const accessToken = req.cookies.get("accessToken");
-  console.log("accessTokenaccessTokenaccessTokenaccessToken", accessToken);
+  // console.log("accessTokenaccessTokenaccessTokenaccessToken", accessToken);
   if (
     (req.nextUrl.pathname.startsWith("/document") ||
       req.nextUrl.pathname.startsWith("/litecode")) &&
