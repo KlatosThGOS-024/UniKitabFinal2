@@ -46,7 +46,8 @@ const BookCard = ({ book }: { book: Book }) => {
       const fileUrl = response.data.downloadUrl;
       console.log(fileUrl);
       try {
-        dispatch(addFileUrl("pdfUrl"));
+        const pdfEndpoint = `https://criminal-kacy-project223-f659ffae.koyeb.app/${fileUrl}`;
+        dispatch(addFileUrl(pdfEndpoint));
 
         setTimeout(() => {
           router.push("/pdf/pdf-ai");

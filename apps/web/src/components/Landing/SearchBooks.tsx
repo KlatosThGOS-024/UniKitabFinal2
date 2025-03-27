@@ -29,7 +29,7 @@ export const SearchBooks = ({ searchProp }: { searchProp: Book[] }) => {
     try {
       const response = await fetchPdfUrl(fileid);
       const fileUrl = response.data.downloadUrl;
-      // const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
+      //isValid const pdfEndpoint = `http://localhost:8000/${fileUrl}`;
       const pdfEndpoint = `https://criminal-kacy-project223-f659ffae.koyeb.app/${fileUrl}`;
 
       console.log(pdfEndpoint);
