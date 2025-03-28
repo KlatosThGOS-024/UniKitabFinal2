@@ -13,9 +13,12 @@ export default function DesktopLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const [isClient, setIsClient] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
 
   useEffect(() => {
+    setIsClient(true);
+
     const checkDeviceWidth = () => {
       const minDesktopWidth = 540;
       setIsDesktop(window.innerWidth >= minDesktopWidth);
@@ -27,6 +30,10 @@ export default function DesktopLayout({
 
     return () => window.removeEventListener("resize", checkDeviceWidth);
   }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   if (!isDesktop) {
     return (
