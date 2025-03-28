@@ -4,7 +4,6 @@ import "./globals.css";
 import ReduxProvider from "./ReduxProvider";
 import { ReactToastify } from "./React-Toastify";
 import AuthProvider from "@/security/AuthProvider";
-import DesktopLayout from "./DesktopLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +35,7 @@ export default function RootLayout({
           {" "}
           <AuthProvider>
             <ReactToastify />
-            <DesktopLayout>{children}</DesktopLayout>
+            {children}
           </AuthProvider>
         </ReduxProvider>
       </body>
