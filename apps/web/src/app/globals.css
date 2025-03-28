@@ -10,7 +10,11 @@
   display: flex;
   flex-direction: row;
 }
-
+@media screen and (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+  }
+}
 .gutter {
   background-color: #eee;
   background-repeat: no-repeat;

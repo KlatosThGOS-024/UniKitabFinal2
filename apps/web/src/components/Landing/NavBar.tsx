@@ -44,7 +44,6 @@ const SearchBar = () => {
     }
   };
 
-  // Close search when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -62,7 +61,7 @@ const SearchBar = () => {
   return (
     <div
       ref={searchRef}
-      className="relative w-full rounded-lg flex items-center bg-white border hover:shadow-sm hover:shadow-[#69D4F3]"
+      className="relative w-fit rounded-lg flex items-center bg-white border hover:shadow-sm hover:shadow-[#69D4F3]"
     >
       <input
         onChange={(e) => searchBook(e.target.value)}
@@ -112,7 +111,7 @@ export const NavBar = () => {
   };
 
   return (
-    <section className="relative">
+    <section className="relative z-50">
       {showModal2 && (
         <Account showModalSignUp={showModalSignUp} param={"signUp"} />
       )}
@@ -150,8 +149,8 @@ export const NavBar = () => {
           {!isLoggedIn ? (
             <button
               onClick={showModalSignUp}
-              className="rounded-full transition-all duration-150 ease-out
-              max-lg:hidden lg:block px-4 text-[18px] font-[500] py-2 
+              className="rounded-lg break-words transition-all duration-150 ease-out
+              max-lg:hidden lg:block px-7 text-[14px] font-[500] py-3 whitespace-nowrap
               bg-[#EC497D] text-white hover:bg-[#645656] hover:text-[#EC497D]"
             >
               Sign Up
@@ -201,57 +200,72 @@ export const NavBar = () => {
       </div>
 
       {showMobileMenu && (
-        <div
-          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
-          onClick={toggleMobileMenu}
-        >
+        <div className="md:hidden  z-40" onClick={toggleMobileMenu}>
           <div
-            className="absolute top-[70px] left-0 right-0 bg-white shadow-lg"
-            onClick={(e) => e.stopPropagation()}
+            className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
           >
-            <ul className="flex flex-col text-start gap-4 p-4 text-[18px]">
-              <li>
+            <div className="py-1" role="none">
+              {isLoggedIn && (
                 <a
-                  href="/document"
-                  className="hover:text-[#69D4F3] cursor-pointer font-[500] text-[#423e3e]"
-                  onClick={toggleMobileMenu}
+                  href="#"
+                  className="block px-4 py-2 text-sm text-gray-700"
+                  role="menuitem"
+                  id="menu-item-0"
                 >
-                  Sell Docs
+                  Profile
                 </a>
-              </li>
-              <li className="hover:text-[#69D4F3] cursor-pointer font-[500] text-[#423e3e]">
-                Educators
-              </li>
-              {!isLoggedIn ? (
-                <>
-                  <li
-                    onClick={showModalSignUp}
-                    className="transition-all duration-150 ease-out text-[18px] font-[500] 
-                    text-black cursor-pointer hover:text-[#EC497D]"
-                  >
-                    Login
-                  </li>
-                  <li
-                    onClick={showModalSignUp}
-                    className="transition-all duration-150 ease-out text-[18px] font-[500] 
-                    text-white bg-[#EC497D] rounded-full px-4 py-2 hover:bg-[#645656]"
-                  >
-                    Sign Up
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="text-[18px] font-[500]">Profile</li>
-                  <li
-                    onClick={handleLogout}
-                    className="transition-all duration-150 ease-out text-[18px] font-[500] 
-                    text-white bg-[#EC497D] rounded-full px-4 py-2 hover:bg-[#645656]"
-                  >
-                    LogOut
-                  </li>
-                </>
               )}
-            </ul>
+              <a
+                href="#"
+                className="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                id="menu-item-1"
+              >
+                Complaint
+              </a>
+              <a
+                href="#"
+                className="block px-4 py-2 text-sm text-gray-700"
+                role="menuitem"
+                id="menu-item-2"
+              >
+                Fuck You
+              </a>
+              <form method="POST" action="#" role="none">
+                <button
+                  onClick={handleLogout}
+                  type="submit"
+                  className="block w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700"
+                  role="menuitem"
+                  id="menu-item-3"
+                >
+                  LogOut
+                </button>
+                {!isLoggedIn && (
+                  <div>
+                    {" "}
+                    <button
+                      onClick={showModalSignUp}
+                      type="submit"
+                      className="block w-full cursor-pointer px-4 py-2 text-left text-sm text-gray-700"
+                      role="menuitem"
+                      id="menu-item-3"
+                    >
+                      Sign In
+                    </button>
+                    {showProfile && (
+                      <Account
+                        showModalSignUp={showModalSignUp}
+                        param={"signUp"}
+                      />
+                    )}
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       )}

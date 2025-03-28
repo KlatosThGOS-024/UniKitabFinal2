@@ -1,9 +1,11 @@
 "use client";
-import { FaBorderAll, FaNetworkWired } from "react-icons/fa6";
-import { FaChevronDown, FaChevronRight, FaChevronUp } from "react-icons/fa";
+import { FaBorderAll } from "react-icons/fa6";
+import { FaChevronDown, FaChevronRight } from "react-icons/fa";
+import { FaNetworkWired } from "react-icons/fa";
 import { SiBmcsoftware } from "react-icons/si";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   allSub,
   networkEngineerSub,
@@ -17,46 +19,87 @@ interface Subject {
 
 const HoveredSubjects = ({
   Subjects,
-  onClose,
+  onSubjectClick,
 }: {
   Subjects: Subject[];
-  onClose?: () => void;
+  onSubjectClick: (subPath: string) => void;
 }) => {
   return (
     <div>
       <ul>
-        {Subjects.map((sub, index) => (
-          <Link
-            href={`/study/${sub.subPath.replace(/\s+/g, "-")}`}
-            key={index}
-            onClick={onClose}
-          >
-            <li className="flex cursor-pointer items-center justify-between gap-x-[64px] my-2 hover:text-[#33BFFA] flex-nowrap">
-              <span>{sub.subName}</span>
-              <FaChevronRight />
-            </li>
-          </Link>
-        ))}
+        {Subjects.map((sub, index) => {
+          return (
+            <div
+              onClick={() => onSubjectClick(sub.subPath)}
+              key={index}
+              className="cursor-pointer"
+            >
+              <li className="flex items-center justify-between gap-x-[64px] my-2 hover:text-[#33BFFA] flex-nowrap">
+                <span>{sub.subName}</span>
+                <FaChevronRight />
+              </li>
+            </div>
+          );
+        })}
       </ul>
     </div>
   );
 };
 
 export const Navigation = () => {
-  const [activeModal, setActiveModal] = useState<number | null>(null);
+  const router = useRouter();
+  const [showModalOne, setShowModalOne] = useState(false);
+  const [showModalTwo, setShowModalTwo] = useState(false);
+  const [showModalThree, setShowModalThree] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const params = useSearchParams();
+  console.log(params.get("study"));
+  const handleModal = (modalNumber: number) => {
+    switch (modalNumber) {
+      case 1:
+        setShowModalTwo(false);
+        setShowModalThree(false);
+        break;
+      case 2:
+        setShowModalOne(false);
+        setShowModalThree(false);
+        break;
+      case 3:
+        setShowModalOne(false);
+        setShowModalTwo(false);
+        break;
+      default:
+        setShowModalOne(false);
+        setShowModalTwo(false);
+        setShowModalThree(false);
+    }
+  };
 
-  const toggleModal = (modalNumber: number) => {
-    setActiveModal(activeModal === modalNumber ? null : modalNumber);
+  const handleSubjectClick = (subPath: string) => {
+    console.log(params);
+
+    setIsLoading(true);
+    setTimeout(() => {
+      router.push(`/study/${subPath.replace(/\s+/g, "-")}`);
+    }, 1500);
   };
 
   return (
     <>
-      {/* Desktop Navigation */}
+      {isLoading && (
+        <div className="fixed inset-0 z-[9999] bg-black/50 flex items-center justify-center">
+          <div className="w-20 h-20 border-[6px] border-white border-t-blue-500 rounded-full animate-spin"></div>
+        </div>
+      )}
+
       <section className="max-lg:hidden block border-[1px] border-x-0 border-b-0">
         <div>
           <ul className="flex items-center relative px-3 justify-between py-3 mx-auto w-[1280px]">
             <li
-              onClick={() => toggleModal(1)}
+              onClick={() => {
+                setShowModalOne(!showModalOne);
+                handleModal(1);
+              }}
               className="flex relative group items-center cursor-pointer gap-2"
             >
               <FaBorderAll />
@@ -64,14 +107,20 @@ export const Navigation = () => {
                 All Subjects
               </span>
               <FaChevronDown />
-              {activeModal === 1 && (
+              {showModalOne && (
                 <div className="absolute z-40 px-4 py-1 rounded-lg bg-white top-[38px]">
-                  <HoveredSubjects Subjects={allSub} />
+                  <HoveredSubjects
+                    Subjects={allSub}
+                    onSubjectClick={handleSubjectClick}
+                  />
                 </div>
               )}
             </li>
             <li
-              onClick={() => toggleModal(2)}
+              onClick={() => {
+                setShowModalTwo(!showModalTwo);
+                handleModal(2);
+              }}
               className="flex relative items-center cursor-pointer group gap-2"
             >
               <SiBmcsoftware />
@@ -79,14 +128,20 @@ export const Navigation = () => {
                 Software Engineering
               </span>
               <FaChevronDown />
-              {activeModal === 2 && (
+              {showModalTwo && (
                 <div className="absolute z-40 px-4 py-1 rounded-lg bg-white top-[38px]">
-                  <HoveredSubjects Subjects={softwareEngineerSub} />
+                  <HoveredSubjects
+                    Subjects={softwareEngineerSub}
+                    onSubjectClick={handleSubjectClick}
+                  />
                 </div>
               )}
             </li>
             <li
-              onClick={() => toggleModal(3)}
+              onClick={() => {
+                setShowModalThree(!showModalThree);
+                handleModal(3);
+              }}
               className="flex group relative items-center gap-2"
             >
               <FaNetworkWired />
@@ -94,81 +149,16 @@ export const Navigation = () => {
                 Network Engineering
               </span>
               <FaChevronDown />
-              {activeModal === 3 && (
+              {showModalThree && (
                 <div className="absolute z-40 px-4 py-1 rounded-lg bg-white top-[38px]">
-                  <HoveredSubjects Subjects={networkEngineerSub} />
+                  <HoveredSubjects
+                    Subjects={networkEngineerSub}
+                    onSubjectClick={handleSubjectClick}
+                  />
                 </div>
               )}
             </li>
           </ul>
-        </div>
-      </section>
-
-      {/* Mobile Navigation */}
-      <section className="lg:hidden block border-b">
-        <div className="px-4 py-3">
-          <div className="space-y-2">
-            <div
-              onClick={() => toggleModal(1)}
-              className="flex justify-between items-center cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <FaBorderAll />
-                <span>All Subjects</span>
-              </div>
-              {activeModal === 1 ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            {activeModal === 1 && (
-              <div className="pl-6 py-2">
-                <HoveredSubjects
-                  Subjects={allSub}
-                  onClose={() => setActiveModal(null)}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="space-y-2 mt-4">
-            <div
-              onClick={() => toggleModal(2)}
-              className="flex justify-between items-center cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <SiBmcsoftware />
-                <span>Software Engineering</span>
-              </div>
-              {activeModal === 2 ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            {activeModal === 2 && (
-              <div className="pl-6 py-2">
-                <HoveredSubjects
-                  Subjects={softwareEngineerSub}
-                  onClose={() => setActiveModal(null)}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="space-y-2 mt-4">
-            <div
-              onClick={() => toggleModal(3)}
-              className="flex justify-between items-center cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <FaNetworkWired />
-                <span>Network Engineering</span>
-              </div>
-              {activeModal === 3 ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            {activeModal === 3 && (
-              <div className="pl-6 py-2">
-                <HoveredSubjects
-                  Subjects={networkEngineerSub}
-                  onClose={() => setActiveModal(null)}
-                />
-              </div>
-            )}
-          </div>
         </div>
       </section>
     </>

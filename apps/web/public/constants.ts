@@ -168,7 +168,7 @@ export const allSub = [
 export const softwareEngineerSub = [
   // { subName: "Mathematics", subPath: "Mathematics" },
   { subName: "Programming  ", subPath: "litecode" },
-  { subName: "Computer Science", subPath: "Computer-Science" },
+  { subName: "Computer Science", subPath: "computer-sci" },
   // { subName: "Engineering", subPath: "Engineering" },
   // { subName: "Science", subPath: "Science" },
   // { subName: "Algorithms", subPath: "Algorithms" },

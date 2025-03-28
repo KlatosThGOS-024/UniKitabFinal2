@@ -7,7 +7,6 @@ import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Image from "next/image";
-import Error from "next/error";
 
 export const Account = ({
   param,
@@ -204,7 +203,7 @@ export const Account = ({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Username
+                Username (Use Kratos123@ to login)
               </label>
               <div className="bg-[#FBFBFB] border border-[#e6e6e6] rounded-md hover:shadow-md flex items-center">
                 <span className="pl-3 pr-2">
@@ -223,7 +222,7 @@ export const Account = ({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Password
+                Password (Use Kratos123@ to login)
               </label>
               <div className="bg-[#FBFBFB] border border-[#e6e6e6] rounded-md hover:shadow-md flex items-center">
                 <span className="pl-3 pr-2">

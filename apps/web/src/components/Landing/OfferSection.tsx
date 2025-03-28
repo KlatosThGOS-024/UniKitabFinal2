@@ -68,27 +68,34 @@ const companyLogos = [
 
 const Company = () => {
   return (
-    <div className="py-4 bg-gray-300 w-full">
-      <div className="container mx-auto px-4">
-        <ul className="flex flex-wrap items-center justify-center space-x-4 md:space-x-8">
-          {companyLogos.map((value, index) => (
-            <li key={index} className="w-24 md:w-32 h-12 md:h-16 my-2 relative">
-              <Image
-                fill
-                alt={value.alt}
-                src={value.imgSrc}
-                className="object-contain"
-                sizes="(max-width: 768px) 96px, 128px"
-              />
-            </li>
-          ))}
+    <div
+      className="py-[21px] flex-shrink flex px-5
+     bg-[#c5c7c9] w-full"
+    >
+      <div className="mx-auto w-[1200px]">
+        <ul className="flex items-center justify-center flex-shrink max-md:gap-[18px] gap-[64px]">
+          {companyLogos.map((value, index) => {
+            return (
+              <li
+                key={index}
+                className="relative max-sm:w-[64px]  w-[126px] h-[50px]"
+              >
+                <Image
+                  fill
+                  alt={value.alt}
+                  src={value.imgSrc}
+                  className="object-contain"
+                  sizes="(max-width: 126px) 100vw"
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
   );
 };
 
-export default Company;
 const FeaturedSubjects = ({ sub }: { sub: subType[] }) => {
   return (
     <div>
